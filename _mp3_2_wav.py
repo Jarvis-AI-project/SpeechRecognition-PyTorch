@@ -2,8 +2,9 @@ from pydub import AudioSegment
 import multiprocessing as mp
 import os
 from time import sleep
+# import argparse
 
-max_processes = 20
+max_processes = 100
 
 #read the folder for files
 # folder_path = str(input("Enter the cv-corpus-clips folder path: "))
@@ -23,8 +24,8 @@ def temp():
     r=9542358932693*9295239632
         
 def convert(mp3_path, wave_path):
-    print(mp3_path)
-    print(wave_path)
+    # print(mp3_path)
+    # print(wave_path)
     mp3 = AudioSegment.from_mp3(mp3_path)
     mp3.export(wave_path, format="wav")
         
@@ -37,7 +38,7 @@ if __name__ == '__main__':
             while True:
                 mp.Process(target=temp).start()
                 
-                print('{} processes are running',len(mp.active_children()))
+                # print('{} processes are running',len(mp.active_children()))
                 
                 if len(mp.active_children())<max_processes:
                     # print(mp.active_children())
@@ -45,12 +46,12 @@ if __name__ == '__main__':
                     p.start()
                     break
                 else:
-                    print('-'*50)
+                    # print('-'*50)
                     print('Waiting for a process to finish...')
                     # print('Active processes: ', mp.active_children())
-                    print(mp3)
-                    print('-'*50)
-                    sleep(3)
+                    # print(mp3)
+                    # print('-'*50)
+                    sleep(.5)
                 
         else:
             print("{} not a mp3 file", mp3)
