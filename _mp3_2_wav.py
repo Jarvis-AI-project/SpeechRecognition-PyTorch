@@ -15,15 +15,19 @@ folder_path = r"clips_test"
 wave_out_path = r"wav_audio_dataset"
 lst_mp3 = os.listdir(folder_path)
 count_mp3 = 0
+index = 1
+
 for i in lst_mp3:
     if i.endswith('.mp3'):
         count_mp3 += 1
+
     else:
         continue
-
+print(str(count_mp3) +" "+"files found")
 
 def temp():
     r=9542358932693*9295239632
+    return r
         
 def convert(mp3_path, wave_path):
     # print(mp3_path)
@@ -32,11 +36,14 @@ def convert(mp3_path, wave_path):
     mp3.export(wave_path, format="wav")
         
 if __name__ == '__main__':
-    print('No of .mp3 files found: ', count_mp3)
+    # print('No of .mp3 files found: ', count_mp3)
     for mp3 in lst_mp3:
         if mp3.endswith('.mp3'):
             mp3_path = folder_path + '\\' + mp3
             wave_path = wave_out_path + '\\' + mp3.replace('.mp3','.wav')
+            print("converting file " + str(index) + "/" + str(count_mp3) + " to wav", end="\r")
+            index = index + 1
+
             while True:
                 # mp.Process(target=temp).start()
                 th.Thread(target=temp).start()
@@ -61,3 +68,5 @@ if __name__ == '__main__':
                 
         else:
             print("{} not a mp3 file", mp3)
+            
+print("Congratulations your files have been  successfully converted to wav file from mp3 !!!")
