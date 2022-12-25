@@ -8,8 +8,8 @@ max_processes = 20
 #read the folder for files
 # folder_path = str(input("Enter the cv-corpus-clips folder path: "))
 # wave_path = str(input("Enter the output folder path: "))
-folder_path = r"D:\cv-corpus-12.0-2022-12-07-en\cv-corpus-12.0-2022-12-07\en\clips_test"
-wave_out_path = r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset"
+folder_path = r"clips_test"
+wave_out_path = r"wav_audio_dataset"
 lst_mp3 = os.listdir(folder_path)
 count_mp3 = 0
 for i in lst_mp3:
