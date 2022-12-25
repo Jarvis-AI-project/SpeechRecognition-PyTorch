@@ -98,8 +98,8 @@ if __name__ == "__main__":
                         help='says that the script should convert mp3 to wav')
     parser.add_argument('--not-convert', dest='convert', action='store_false',
                         help='says that the script should not convert mp3 to wav')
-    t1 = threading.Thread(target=main, args=('--convert'))
-    t2 = threading.Thread(target=main, args=('--not-convert'))
+    # t1 = threading.Thread(target=main, args=('--convert'))
+    # t2 = threading.Thread(target=main, args=('--not-convert'))
         
     args = parser.parse_args()
     # t1.start()
