@@ -6,7 +6,7 @@ from time import sleep
 # import argparse
 
 # max_processes = 100
-max_threads = 100
+max_threads = 400
 
 #read the folder for files
 # folder_path = str(input("Enter the cv-corpus-clips folder path: "))
@@ -52,7 +52,8 @@ if __name__ == '__main__':
                     break
                 else:
                     # print('-'*50)
-                    print('Waiting for a process to finish...')
+                    print('Waiting for a thread to finish...')
+                    # print('Waiting for a process to finish...')
                     # print('Active processes: ', mp.active_children())
                     # print(mp3)
                     # print('-'*50)
