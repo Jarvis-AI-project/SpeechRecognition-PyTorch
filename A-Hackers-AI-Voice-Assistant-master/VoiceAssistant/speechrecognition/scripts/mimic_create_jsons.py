@@ -37,7 +37,7 @@ def main(args):
     
     f = open(args.save_json_path +"/"+ "test.json", "w")
 
-   with open(args.save_json_path +"/"+ 'test.json','w') as f:
+    with open(args.save_json_path +"/"+ 'test.json','w') as f:
         d = len(data)
         i=int(d-d/percent)
         while(i<d):
