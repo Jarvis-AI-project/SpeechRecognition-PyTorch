@@ -82,14 +82,14 @@ if __name__ == '__main__':
                     break
                 else:
                     sleep(1)
-                    print('-'*50, end = '\r')
-                    print('\n')
-                    print('Waiting for a thread to finish...', end='\r')
+                    # print('-'*50, end = '\r')
+                    # print('\n')
+                    # print('Waiting for a thread to finish...', end='\r')
                     # print('Waiting for a process to finish...')
                     # print('Active processes: ', mp.active_children())
-                    print('Active threads: ', len(th.enumerate()), end='\r')
+                    print('Active threads: ', len(th.enumerate()), end='\n\n')
                     # print(mp3)
-                    print('-'*50, end = '\r')
+                    # print('-'*50, end = '\r')
 
         else:
             print("'{}' not a mp3 file".format(mp3))
