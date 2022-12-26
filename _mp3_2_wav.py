@@ -5,12 +5,12 @@ import os
 import sys
 from time import sleep
 from time import time
-# import argparse
 
 # max_processes = 100
 max_threads = 400
 current_time = time()
-# read the folder for files
+
+# max_threads = int(input("Enter the number of max threads: "))
 # folder_path = str(input("Enter the cv-corpus-clips folder path: "))
 # wave_path = str(input("Enter the output folder path: "))
 folder_path = "clips_test"
@@ -59,13 +59,13 @@ if __name__ == '__main__':
         if mp3.endswith('.mp3'):
             mp3_path = folder_path + '\\' + mp3
             wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
-            print("converting file " + str(index) + "/" + str(count_mp3) + " to wav" + '\t \t' +
-                  'Time passed: ', round(time() - current_time, 2), 's' + '\t \t' +
-                  'Time remaining: ', round((time() - current_time) * (count_mp3 - index) / index, 2), 's', end='\r')
+            print("Converting File: " + str(index) + "/" + str(count_mp3) + " to wav" + ' | ' +
+                  'Time Passed: ', "'{}' hour '{}' second".format(round(time() - current_time, 1)//60, round(time()-current_time, 1) % 60) + ' | ' +
+                  'Time Remaining: ', "'{}' hour '{}' second".format(round((time() - current_time) * (count_mp3 - index) / index, 1)//60, round((time() - current_time) * (count_mp3 - index) / index, 1) % 60), end='\r')
             # print('\r\r\r')
             # print('Time passed: ', time() - current_time, 'seconds', end='\r')
             index += 1
-            sleep(.001)
+            # sleep(.001)
 
             while True:
                 # mp.Process(target=temp).start()
@@ -81,8 +81,8 @@ if __name__ == '__main__':
                     th.Thread(target=convert, args=(
                         mp3_path, wave_path)).start()
                     break
-                else:
-                    sleep(1)
+                # else:
+                #     sleep(1)
                     # print('-'*50, end = '\r')
                     # print('\n')
                     # print('Waiting for a thread to finish...', end='\r')
