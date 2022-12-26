@@ -59,9 +59,9 @@ if __name__ == '__main__':
         if mp3.endswith('.mp3'):
             mp3_path = folder_path + '\\' + mp3
             wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
-            print("converting file " + str(index) + "/" + str(count_mp3) + " to wav" + '\t \t'+
-            'Time passed: ', round(time() - current_time, 2), 's' + '\t \t'+
-            'Time remaining: ', round((time() - current_time) * (count_mp3 - index) / index, 2), 's', end='\r')
+            print("converting file " + str(index) + "/" + str(count_mp3) + " to wav" + '\t \t' +
+                  'Time passed: ', round(time() - current_time, 2), 's' + '\t \t' +
+                  'Time remaining: ', round((time() - current_time) * (count_mp3 - index) / index, 2), 's', end='\r')
             # print('\r\r\r')
             # print('Time passed: ', time() - current_time, 'seconds', end='\r')
             index += 1
@@ -77,9 +77,11 @@ if __name__ == '__main__':
                 if len(th.enumerate()) < max_threads:
                     # print(mp.active_children())
                     # p = mp.Process(target=convert, args=(mp3_path, wave_path))
-                    th.Thread(target=convert, args=(mp3_path, wave_path)).start()
+                    th.Thread(target=convert, args=(
+                        mp3_path, wave_path)).start()
                     break
                 else:
+                    sleep(1)
                     print('-'*50)
                     print('Waiting for a thread to finish...')
                     # print('Waiting for a process to finish...')
@@ -87,15 +89,16 @@ if __name__ == '__main__':
                     print('Active threads: ', len(th.enumerate()))
                     # print(mp3)
                     print('-'*50)
-                    sleep(1)
 
         else:
             print("'{}' not a mp3 file".format(mp3))
 
-    print("Congratulations '{}' files have been successfully converted to wave in '{}' seconds".format(index-1, round(time() - current_time, 2)))
-    print('Conversion Speed: "{}" files per second'.format(round((index-1)/(time() - current_time))))
-    
-    #remove wav_audio_dataset folder if it exists
+    print("Congratulations '{}' files have been successfully converted to wave in '{}' seconds".format(
+        index-1, round(time() - current_time, 2)))
+    print('Conversion Speed: "{}" files per second'.format(
+        round((index-1)/(time() - current_time))))
+
+    # remove wav_audio_dataset folder if it exists
     if len(th.enumerate()) > 0:
         print('Waiting for threads to finish', end='\r')
         sleep(1)
