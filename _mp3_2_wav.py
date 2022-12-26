@@ -65,6 +65,7 @@ if __name__ == '__main__':
             # print('\r\r\r')
             # print('Time passed: ', time() - current_time, 'seconds', end='\r')
             index += 1
+            sleep(.001)
 
             while True:
                 # mp.Process(target=temp).start()
@@ -87,7 +88,7 @@ if __name__ == '__main__':
                     # print('Waiting for a thread to finish...', end='\r')
                     # print('Waiting for a process to finish...')
                     # print('Active processes: ', mp.active_children())
-                    print('Active threads: ', len(th.enumerate()), end='\n\n')
+                    # print('Active threads: ', len(th.enumerate()), end='\n\n')
                     # print(mp3)
                     # print('-'*50, end = '\r')
 
