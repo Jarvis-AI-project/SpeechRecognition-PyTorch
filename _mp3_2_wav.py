@@ -15,9 +15,10 @@ current_time = time()
 # train_file = str(input("Enter the training file path: "))
 # wave_out_path = str(input("Enter the output folder path: "))
 max_threads = 200
-folder_path = r'G:\cv-corpus-12.0-2022-12-07\en'
-train_file = r"G:\cv-corpus-12.0-2022-12-07\en\validated.tsv"
-wave_out_path = r"C:\wave-out"
+folder_path = r'D:\cv-corpus-12.0-2022-12-07-en\cv-corpus-12.0-2022-12-07\en'
+train_file = r"D:\cv-corpus-12.0-2022-12-07-en\cv-corpus-12.0-2022-12-07\en\validated.tsv"
+wave_out_path = r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset"
+wave_path_two= r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_second"
 
 lst_files=[]
 count_train =0
@@ -28,6 +29,8 @@ with open(train_file, 'r', encoding='utf8', newline='', errors='replace') as f:
         count_train+=1
 count_mp3 = 0
 index = 1
+
+
 
 # make wav_audio_dataset folder if it doesn't exist
 if not os.path.exists(wave_out_path):
@@ -46,14 +49,14 @@ print('Total number of files in the training file: ', count_train)
 print(".mp3 files found: ", count_mp3)
 
 
+    
+
 cont = input("Do you want to continue? (y/n): ")
 if cont == 'y':
     print("Converting files to wav")
 else:
     sys.exit(1)
-# def temp():
-#     r = 9542358932693*9295239632
-#     return r
+
 
 def write_error_log(log):
     with open("error_files.txt", 'a') as f:
@@ -61,11 +64,13 @@ def write_error_log(log):
         f.write('\n')
 
 def convert(mp3_path, wave_path):
+    
     try:
         # print(mp3_path)
         # print(wave_path)
         mp3 = AudioSegment.from_mp3(mp3_path)
         mp3.export(wave_path, format="wav")
+        
     except Exception as e:
         print(e)
         # print("OS Error")
@@ -76,8 +81,8 @@ def convert(mp3_path, wave_path):
                 break
             except Exception as e:
                 continue
-                
-        # sys.exit(1)
+    
+
 
 
 if __name__ == '__main__':
@@ -85,7 +90,11 @@ if __name__ == '__main__':
     for mp3 in lst_files:
         if mp3.endswith('.mp3'):
             mp3_path = folder_path + '\\clips\\' + mp3
-            wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
+            if index%2==0:
+                wave_path=wave_path_two + '\\' + mp3.replace('.mp3', '.wav')
+            else:
+                wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
+         
             print("Converting File: " + str(index) + "/" + str(count_mp3) + " to wav" + ' | ' +
                   'Time Passed: ', "'{}' hour '{}' min '{}' second".format(round(((time() - current_time)//3600), 1), round((((time() - current_time)%3600)//60)), round(((time()-current_time) % 60), 1)) + ' | ' +
                   'Time Remaining: ', "'{}' hour '{}' min '{}' second".format(round((((time() - current_time) * (count_mp3 - index) / index)//3600), 1), round(((((time() - current_time) * (count_mp3 - index) / index)%3600)//60)), round((((time() - current_time) * (count_mp3 - index) / index) % 60), 1)), end='\r')
@@ -105,6 +114,7 @@ if __name__ == '__main__':
                 if len(th.enumerate()) < max_threads:
                     # print(mp.active_children())
                     # p = mp.Process(target=convert, args=(mp3_path, wave_path))
+                   
                     th.Thread(target=convert, args=(
                         mp3_path, wave_path)).start()
                     break
