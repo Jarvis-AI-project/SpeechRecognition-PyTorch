@@ -7,14 +7,14 @@ from time import sleep
 from time import time
 
 # max_processes = 100
-max_threads = 400
+max_threads = 250
 current_time = time()
 
 # max_threads = int(input("Enter the number of max threads: "))
 # folder_path = str(input("Enter the cv-corpus folder path: "))
 # train_file = str(input("Enter the training file path: "))
 # wave_out_path = str(input("Enter the output folder path: "))
-max_threads = 300
+max_threads = 200
 folder_path = r'G:\cv-corpus-12.0-2022-12-07\en'
 train_file = r"G:\cv-corpus-12.0-2022-12-07\en\validated.tsv"
 wave_out_path = r"C:\wave-out"
@@ -87,8 +87,8 @@ if __name__ == '__main__':
             mp3_path = folder_path + '\\clips\\' + mp3
             wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
             print("Converting File: " + str(index) + "/" + str(count_mp3) + " to wav" + ' | ' +
-                  'Time Passed: ', "'{}' hour '{}' min '{}' second".format(round(((time() - current_time)//3600), 1), round((((time() - current_time)%3600)/60)), round(((time()-current_time) % 60), 1)) + ' | ' +
-                  'Time Remaining: ', "'{}' hour '{}' min '{}' second".format(round((((time() - current_time) * (count_mp3 - index) / index)//3600), 1), round(((((time() - current_time) * (count_mp3 - index) / index)%3600)/60)), round((((time() - current_time) * (count_mp3 - index) / index) % 60), 1)), end='\r')
+                  'Time Passed: ', "'{}' hour '{}' min '{}' second".format(round(((time() - current_time)//3600), 1), round((((time() - current_time)%3600)//60)), round(((time()-current_time) % 60), 1)) + ' | ' +
+                  'Time Remaining: ', "'{}' hour '{}' min '{}' second".format(round((((time() - current_time) * (count_mp3 - index) / index)//3600), 1), round(((((time() - current_time) * (count_mp3 - index) / index)%3600)//60)), round((((time() - current_time) * (count_mp3 - index) / index) % 60), 1)), end='\r')
             # print('\r\r\r')
             # print('Time passed: ', time() - current_time, 'seconds', end='\r')
             index += 1
