@@ -11,11 +11,21 @@ max_threads = 400
 current_time = time()
 
 # max_threads = int(input("Enter the number of max threads: "))
-# folder_path = str(input("Enter the cv-corpus-clips folder path: "))
-# wave_path = str(input("Enter the output folder path: "))
-folder_path = "clips_test"
-wave_out_path = "wav_audio_dataset"
-lst_files = os.listdir(folder_path)
+# folder_path = str(input("Enter the cv-corpus folder path: "))
+# train_file = str(input("Enter the training file path: "))
+# wave_out_path = str(input("Enter the output folder path: "))
+max_threads = 300
+folder_path = r'G:\cv-corpus-12.0-2022-12-07\en'
+train_file = r"G:\cv-corpus-12.0-2022-12-07\en\validated.tsv"
+wave_out_path = r"C:\wave-out"
+
+lst_files=[]
+count_train =0
+with open(train_file, 'r', encoding='utf8', newline='', errors='replace') as f:
+    for line in f:
+        file_name = line.split('\t')[1].strip()
+        lst_files.append(file_name)
+        count_train+=1
 count_mp3 = 0
 index = 1
 
@@ -29,17 +39,26 @@ else:
 for i in lst_files:
     if i.endswith('.mp3'):
         count_mp3 += 1
-
     else:
         continue
-print('Total number of files in the folder: ', len(lst_files))
+print('Total number of files in the folder: ', len(os.listdir(folder_path+'//'+'clips')))
+print('Total number of files in the training file: ', count_train)
 print(".mp3 files found: ", count_mp3)
 
 
+cont = input("Do you want to continue? (y/n): ")
+if cont == 'y':
+    print("Converting files to wav")
+else:
+    sys.exit(1)
 # def temp():
 #     r = 9542358932693*9295239632
 #     return r
 
+def write_error_log(log):
+    with open("error_files.txt", 'a') as f:
+        f.write(log)
+        f.write('\n')
 
 def convert(mp3_path, wave_path):
     try:
@@ -47,21 +66,29 @@ def convert(mp3_path, wave_path):
         # print(wave_path)
         mp3 = AudioSegment.from_mp3(mp3_path)
         mp3.export(wave_path, format="wav")
-    except OSError as e:
+    except Exception as e:
         print(e)
-        print("OS Error")
-        sys.exit(1)
+        # print("OS Error")
+        print("Error in converting file: ", mp3_path)
+        while True:
+            try:
+                write_error_log(mp3_path +' | ' +  e)
+                break
+            except Exception as e:
+                continue
+                
+        # sys.exit(1)
 
 
 if __name__ == '__main__':
     # print('No of .mp3 files found: ', count_mp3)
     for mp3 in lst_files:
         if mp3.endswith('.mp3'):
-            mp3_path = folder_path + '\\' + mp3
+            mp3_path = folder_path + '\\clips\\' + mp3
             wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
             print("Converting File: " + str(index) + "/" + str(count_mp3) + " to wav" + ' | ' +
-                  'Time Passed: ', "'{}' hour '{}' second".format(round(time() - current_time, 1)//60, round(time()-current_time, 1) % 60) + ' | ' +
-                  'Time Remaining: ', "'{}' hour '{}' second".format(round((time() - current_time) * (count_mp3 - index) / index, 1)//60, round((time() - current_time) * (count_mp3 - index) / index, 1) % 60), end='\r')
+                  'Time Passed: ', "'{}' hour '{}' min '{}' second".format(round(((time() - current_time)//3600), 1), round((((time() - current_time)%3600)/60)), round(((time()-current_time) % 60), 1)) + ' | ' +
+                  'Time Remaining: ', "'{}' hour '{}' min '{}' second".format(round((((time() - current_time) * (count_mp3 - index) / index)//3600), 1), round(((((time() - current_time) * (count_mp3 - index) / index)%3600)/60)), round((((time() - current_time) * (count_mp3 - index) / index) % 60), 1)), end='\r')
             # print('\r\r\r')
             # print('Time passed: ', time() - current_time, 'seconds', end='\r')
             index += 1
