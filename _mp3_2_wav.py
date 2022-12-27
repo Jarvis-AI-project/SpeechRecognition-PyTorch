@@ -17,8 +17,8 @@ current_time = time()
 max_threads = 200
 folder_path = r'D:\cv-corpus-12.0-2022-12-07-en\cv-corpus-12.0-2022-12-07\en'
 train_file = r"D:\cv-corpus-12.0-2022-12-07-en\cv-corpus-12.0-2022-12-07\en\validated.tsv"
-wave_out_path = r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset"
-wave_path_two= r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_second"
+wave_out_path = r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_p1"
+wave_out_path_2= r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_p2"
 
 lst_files=[]
 count_train =0
@@ -91,7 +91,7 @@ if __name__ == '__main__':
         if mp3.endswith('.mp3'):
             mp3_path = folder_path + '\\clips\\' + mp3
             if index%2==0:
-                wave_path=wave_path_two + '\\' + mp3.replace('.mp3', '.wav')
+                wave_path=wave_out_path_2 + '\\' + mp3.replace('.mp3', '.wav')
             else:
                 wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
          
@@ -141,5 +141,5 @@ if __name__ == '__main__':
     if len(th.enumerate()) > 0:
         print('Waiting for threads to finish', end='\r')
         sleep(1)
-    os.system('rmdir /s /q "{}"'.format(wave_out_path))
-    print('wav_audio_dataset folder removed')
+    # os.system('rmdir /s /q "{}"'.format(wave_out_path))
+    # print('wav_audio_dataset folder removed')
