@@ -15,10 +15,10 @@ current_time = time()
 # train_file = str(input("Enter the training file path: "))
 # wave_out_path = str(input("Enter the output folder path: "))
 max_threads = 200
-folder_path = r'D:\cv-corpus-12.0-2022-12-07-en\cv-corpus-12.0-2022-12-07\en'
-train_file = r"D:\cv-corpus-12.0-2022-12-07-en\cv-corpus-12.0-2022-12-07\en\validated.tsv"
-wave_out_path = r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_p1"
-wave_out_path_2= r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_p2"
+folder_path = r'D:\cv-corpus-12.0-2022-12-07\en'
+train_file = r"C:\cv-corpus-12.0-2022-12-07\en\validated.tsv"
+wave_out_path = r"E:\wav_audio_dataset"
+# wave_out_path_2= r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_p2"
 
 lst_files=[]
 count_train =0
@@ -90,10 +90,13 @@ if __name__ == '__main__':
     for mp3 in lst_files:
         if mp3.endswith('.mp3'):
             mp3_path = folder_path + '\\clips\\' + mp3
-            if index%2==0:
-                wave_path=wave_out_path_2 + '\\' + mp3.replace('.mp3', '.wav')
-            else:
-                wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
+            
+            wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
+            
+            # if index%2==0:
+            #     wave_path=wave_out_path_2 + '\\' + mp3.replace('.mp3', '.wav')
+            # else:
+            #     wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
          
             print("Converting File: " + str(index) + "/" + str(count_mp3) + " to wav" + ' | ' +
                   'Time Passed: ', "'{}' hour '{}' min '{}' second".format(round(((time() - current_time)//3600), 1), round((((time() - current_time)%3600)//60)), round(((time()-current_time) % 60), 1)) + ' | ' +
