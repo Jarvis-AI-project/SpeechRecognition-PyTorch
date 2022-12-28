@@ -2,3 +2,5 @@ wav_audio_dataset/
 clips_test/
 output.wav
 /train-model/speechrecognition/__pycache__/
+train-model/speechrecognition/demo/audio_temp
+train-model/speechrecognition/audio_temp
