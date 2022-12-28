@@ -1,1 +1,0 @@
-python3 train.py --train_file /home/jarvis/json_dataset_out.json --valid_file /home/jarvis/json_model_test.json --save_model_path /home/jarvis/jarvis_voice_model

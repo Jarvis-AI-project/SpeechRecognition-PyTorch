@@ -7,7 +7,7 @@ import torchaudio
 import torch
 import sys
 import numpy as np
-from neuralnet.dataset import get_featurizer
+from dataset import get_featurizer
 from decoder import DecodeGreedy, BeamSearchDecoderCTC
 from threading import Event
 

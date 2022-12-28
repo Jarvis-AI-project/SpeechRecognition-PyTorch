@@ -1,6 +1,7 @@
-from neuralnet.utils import TextProcess
+from utils import TextProcess
 import torch
-from pyctcdecode import*
+# from pyctcdecode import*
+from ctcdecode import CTCBeamDecoder
 textprocess = TextProcess()
 
 labels = [
@@ -49,7 +50,7 @@ class BeamSearchDecoderCTC:
 
     def __init__(self, beam_size=100, blank_id=labels.index('_'), kenlm_path=None):
         print("loading beam search with lm...")
-        self.decoder =BeamSearchDecoderCTC(
+        self.decoder =CTCBeamDecoder(
             labels, alpha=0.522729216841, beta=0.96506699808,
             beam_width=beam_size, blank_id=labels.index('_'),
             model_path=kenlm_path)
