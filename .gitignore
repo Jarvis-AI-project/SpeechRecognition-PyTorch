@@ -1,5 +1,4 @@
 wav_audio_dataset/
 clips_test/
-tempCodeRunnerFile.py
 output.wav
-temp.mp3
+*temp

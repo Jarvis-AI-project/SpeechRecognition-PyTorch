@@ -1,10 +1,14 @@
 from pydub import AudioSegment
+AudioSegment.ffmpeg = "/usr/bin/ffmpeg"
+
 # import multiprocessing as mp
 import threading as th
 import os
 import sys
 from time import sleep
 from time import time
+import psutil
+
 
 # max_processes = 100
 max_threads = 250
@@ -14,11 +18,11 @@ current_time = time()
 # folder_path = str(input("Enter the cv-corpus folder path: "))
 # train_file = str(input("Enter the training file path: "))
 # wave_out_path = str(input("Enter the output folder path: "))
-max_threads = 200
-folder_path = r'D:\cv-corpus-12.0-2022-12-07\en'
-train_file = r"C:\cv-corpus-12.0-2022-12-07\en\validated.tsv"
-wave_out_path = r"E:\wav_audio_dataset"
-# wave_out_path_2= r"D:\cv-corpus-12.0-2022-12-07-en\wav_audio_dataset_p2"
+max_threads = 250
+folder_path = '/home/jarvis/cv-corpus-12.0-2022-12-07/en'
+train_file = "/home/jarvis/cv-corpus-12.0-2022-12-07/en/validated.tsv"
+wave_out_path = "/media/jarvis/WD1/wave_audio_dataset_p1"
+wave_out_path_2= "/media/jarvis/WD2/wave_audio_dataset_p2"
 
 lst_files=[]
 count_train =0
@@ -44,7 +48,7 @@ for i in lst_files:
         count_mp3 += 1
     else:
         continue
-print('Total number of files in the folder: ', len(os.listdir(folder_path+'//'+'clips')))
+print('Total number of files in the folder: ', len(os.listdir(folder_path+'/'+'clips')))
 print('Total number of files in the training file: ', count_train)
 print(".mp3 files found: ", count_mp3)
 
@@ -89,18 +93,20 @@ if __name__ == '__main__':
     # print('No of .mp3 files found: ', count_mp3)
     for mp3 in lst_files:
         if mp3.endswith('.mp3'):
-            mp3_path = folder_path + '\\clips\\' + mp3
+            mp3_path = folder_path + '/clips/' + mp3
             
-            wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
+            # wave_path = wave_out_path + '/' + mp3.replace('.mp3', '.wav')
             
-            # if index%2==0:
-            #     wave_path=wave_out_path_2 + '\\' + mp3.replace('.mp3', '.wav')
-            # else:
-            #     wave_path = wave_out_path + '\\' + mp3.replace('.mp3', '.wav')
+            if index%2==0:
+                wave_path=wave_out_path_2 + '/' + mp3.replace('.mp3', '.wav')
+            else:
+                wave_path = wave_out_path + '/' + mp3.replace('.mp3', '.wav')
          
             print("Converting File: " + str(index) + "/" + str(count_mp3) + " to wav" + ' | ' +
-                  'Time Passed: ', "'{}' hour '{}' min '{}' second".format(round(((time() - current_time)//3600), 1), round((((time() - current_time)%3600)//60)), round(((time()-current_time) % 60), 1)) + ' | ' +
-                  'Time Remaining: ', "'{}' hour '{}' min '{}' second".format(round((((time() - current_time) * (count_mp3 - index) / index)//3600), 1), round(((((time() - current_time) * (count_mp3 - index) / index)%3600)//60)), round((((time() - current_time) * (count_mp3 - index) / index) % 60), 1)), end='\r')
+                  'Time Passed: ', "'{}' h '{}' m '{}' s".format(round(((time() - current_time)//3600), 1), round((((time() - current_time)%3600)//60)), round(((time()-current_time) % 60), 1)) + ' | ' +
+                  'Time Remaining: ', "'{}' h '{}' m '{}' s".format(round((((time() - current_time) * (count_mp3 - index) / index)//3600), 1), round(((((time() - current_time) * (count_mp3 - index) / index)%3600)//60)), round((((time() - current_time) * (count_mp3 - index) / index) % 60), 1)) + ' | ' +
+                  "CPU: '{}%'".format(psutil.cpu_percent()) + ' | '
+                  , end='\r')
             # print('\r\r\r')
             # print('Time passed: ', time() - current_time, 'seconds', end='\r')
             index += 1

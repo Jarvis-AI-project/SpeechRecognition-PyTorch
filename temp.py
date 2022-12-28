@@ -47,6 +47,3 @@
 # #     l = pydub.AudioSegment.from_mp3(input_filename)
 # #     l.export(output_filename, format="wav")
 #     # os.remove(output_filename)
-from dotenv import load_dotenv
-import os
-print(os.environ.get('MAX_THREADS'))
