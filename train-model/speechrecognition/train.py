@@ -120,7 +120,7 @@ def main(args):
     else:
         speech_module = SpeechModule(model, args)
 
-    logger = TensorBoardLogger(args.logdir, name='speech_recognition')
+    logger = TensorBoardLogger(args.logdir, name='tb_logs_training')
     # trainer = Trainer(logger=logger) #modified
 
     trainer = Trainer(

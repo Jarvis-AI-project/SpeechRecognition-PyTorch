@@ -6,3 +6,4 @@ train-model/speechrecognition/demo/audio_temp
 train-model/speechrecognition/audio_temp
 audio_temp
 json_dataset/
+output/
