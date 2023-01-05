@@ -134,7 +134,10 @@ def main(args):
         enable_checkpointing=True,  #modified
         # checkpoint_callback=checkpoint_callback(args),    #modified
         callbacks=[checkpoint_callback(args)],    #modified
-        resume_from_checkpoint=args.resume_from_checkpoint
+        resume_from_checkpoint=args.resume_from_checkpoint,
+        # log_after_n_steps=args.valid_every
+        # limit_val_batches=0.0,
+        # check_val_every_n_epoch=None
     )
     trainer.fit(speech_module)
 

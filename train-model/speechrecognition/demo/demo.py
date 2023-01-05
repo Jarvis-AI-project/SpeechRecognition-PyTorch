@@ -57,5 +57,5 @@ if __name__ == "__main__":
                         help='If you have an ngram lm use to decode')
     args = parser.parse_args()
     asr_engine = SpeechRecognitionEngine(args.model_file, args.ken_lm_file)
-    webbrowser.open_new('http://127.0.0.1:3000/')
-    app.run(port=3000)
+    webbrowser.open_new('http://127.0.0.1:3100/')
+    app.run(port=3100, debug=True)

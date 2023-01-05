@@ -1,1 +1,1 @@
-python3 /home/jarvis/mp3-wave-converter/train-model/speechrecognition/optimize_graph.py --model_checkpoint /home/jarvis/model_logs/version_0/checkpoints/epoch=0-step=48.ckpt --save_path /home/jarvis/jarvis_voice_model
+python3 /home/jarvis/SpeechRecognition-PyTorch/train-model/speechrecognition/optimize_graph.py --model_checkpoint /home/jarvis/SpeechRecognition-PyTorch/output/jarvis_voice_model_train_file_out/epoch=9-step=97.ckpt --save_path /home/jarvis/SpeechRecognition-PyTorch/output/jarvis_voice_model_make_model_out/model.pth
